@@ -1,0 +1,29 @@
+<html lang="en" dir="ltr">
+<head>
+  <title>Color Hex Codes</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/jquery-3.5.0.min.js"></script>
+  <script src="js/main.js"></script>
+</head>
+<body>
+  <div id="background">
+    <div id="center">
+        <input id="hex_input" type="text" value="#ffffff">
+        <br>
+        <div id="rgb_inputs">
+          <input id="r_input" class="rgb_input" type="number" max=255 min=0 value=255>
+          <input id="g_input" class="rgb_input" type="number" max=255 min=0 value=255>
+          <input id="b_input" class="rgb_input" type="number" max=255 min=0 value=255>
+        </div>
+        <button id="random_color" type="button">Random Color</button>
+        <div id="random_specific_color">
+          <h3>Random shade of:</h3>
+          <button id="random_red_color" class="random_color_color" type="button" value="ff0000">Red</button>
+          <button id="random_green_color" class="random_color_color" type="button" value="00ff00">Green</button>
+          <button id="random_blue_color" class="random_color_color" type="button" value="0000ff">Blue</button>
+          <button id="random_yellow_color" class="random_color_color" type="button" value="ffff00">Yellow</button>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
