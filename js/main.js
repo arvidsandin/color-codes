@@ -4,17 +4,28 @@ function changeBackgroundColor(color){
     if(color.length === 4){
       color = '#' + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3)
     }
+    var red = parseInt(color.substring(1, 3), 16);
+    var green = parseInt(color.substring(3, 5), 16);
+    var blue = parseInt(color.substring(5, 7), 16);
     $('#hex_input').css('background-color', 'rgba(255, 255, 255, 0.5)');
     $("#background").css('background-color', color);
-    if (isLightColor(color)) {
-      $('#center').css('background-color', 'rgba(0, 0, 0, 0.3)');
+    $('.tint')[0].style.backgroundColor = color;
+    $('.shade')[0].style.backgroundColor = color;
+    for (var i = 0; i < $('.tint').length-1; i++) {
+      var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
+      var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
+      var tempBlue = blue + Math.round((255 - blue)*1/1.2**($('.tint').length - i-1));
+      $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
     }
-    else {
-      $('#center').css('background-color', 'rgba(255, 255, 255, 0.3)');
+    for (var i = 0; i < $('.shade').length-1; i++) {
+      var tempRed = Math.round(red*1/1.1**(i+1));
+      var tempGreen = Math.round(green*1/1.1**(i+1));
+      var tempBlue =Math.round(blue*1/1.1**(i+1));
+      $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
     }
-    $('#r_input').val(parseInt(color.substring(1, 3), 16));
-    $('#g_input').val(parseInt(color.substring(3, 5), 16));
-    $('#b_input').val(parseInt(color.substring(5, 7), 16));
+    $('#r_input').val(red);
+    $('#g_input').val(green);
+    $('#b_input').val(blue);
   }
   else {
     $('#hex_input').css('background-color', 'rgba(255, 0, 0, 064)');
