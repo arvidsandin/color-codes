@@ -1,4 +1,4 @@
-# color-codes
+# Color Codes
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
