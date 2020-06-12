@@ -11,17 +11,29 @@ function changeBackgroundColor(color){
     $("#background").css('background-color', color);
     $('.tint')[0].style.backgroundColor = color;
     $('.shade')[0].style.backgroundColor = color;
+    $('.tint_name')[0].innerHTML = color;
+    $('.shade_name')[0].innerHTML = color;
+    if (isLightColor(color)){
+        $('.tint_name')[0].style.color = ('#000');
+        $('.shade_name')[0].style.color = ('#000');
+    }
+    else {
+      $('.tint_name')[0].style.color = ('#fff');
+      $('.shade_name')[0].style.color = ('#fff');
+    }
     for (var i = 0; i < $('.tint').length-1; i++) {
       var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
       var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
       var tempBlue = blue + Math.round((255 - blue)*1/1.2**($('.tint').length - i-1));
       $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
+      $('.tint_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
     }
     for (var i = 0; i < $('.shade').length-1; i++) {
       var tempRed = Math.round(red*1/1.1**(i+1));
       var tempGreen = Math.round(green*1/1.1**(i+1));
       var tempBlue =Math.round(blue*1/1.1**(i+1));
       $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
+      $('.shade_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
     }
     $('#r_input').val(red);
     $('#g_input').val(green);
