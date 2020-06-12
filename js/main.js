@@ -11,17 +11,29 @@ function changeBackgroundColor(color){
     $("#background").css('background-color', color);
     $('.tint')[0].style.backgroundColor = color;
     $('.shade')[0].style.backgroundColor = color;
+    $('.tint_name')[0].innerHTML = color;
+    $('.shade_name')[0].innerHTML = color;
+    if (isLightColor(color)){
+        $('.tint_name')[0].style.color = ('#000');
+        $('.shade_name')[0].style.color = ('#000');
+    }
+    else {
+      $('.tint_name')[0].style.color = ('#fff');
+      $('.shade_name')[0].style.color = ('#fff');
+    }
     for (var i = 0; i < $('.tint').length-1; i++) {
       var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
       var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
       var tempBlue = blue + Math.round((255 - blue)*1/1.2**($('.tint').length - i-1));
       $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
+      $('.tint_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
     }
     for (var i = 0; i < $('.shade').length-1; i++) {
       var tempRed = Math.round(red*1/1.1**(i+1));
       var tempGreen = Math.round(green*1/1.1**(i+1));
       var tempBlue =Math.round(blue*1/1.1**(i+1));
       $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
+      $('.shade_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
     }
     $('#r_input').val(red);
     $('#g_input').val(green);
@@ -40,6 +52,14 @@ function isColor(strColor){
 function isLightColor(color){
   return 128 * 3 < parseInt(color.substring(1, 3), 16) + parseInt(color.substring(3, 5), 16) + parseInt(color.substring(5, 7), 16)
 }
+
+function hex(x) {
+  return ("0" + parseInt(x).toString(16)).slice(-2);
+}
+function rgb2hex(rgb) {
+   rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+   return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
 
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
@@ -70,28 +90,50 @@ $(document).ready(function() {
     changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
   });
 
+  $('.tint, .shade').click(function(){
+    var chosenColor = rgb2hex($(this).css('backgroundColor'))
+    $('#hex_input').val(chosenColor);
+    changeBackgroundColor(chosenColor);
+  });
+
   $('#random_color').click(function(){
     var color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
     changeBackgroundColor(color);
   });
   $('#random_red_color').click(function(){
-    var red = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
+    var tempRed = Math.floor(Math.random()*192+64)
+    var red = tempRed.toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*(tempRed-64));
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    var tempGreen = Math.floor(Math.random()*(tempRed-64));
+    while (Math.abs(tempBlue - tempGreen) > 32) {
+      tempGreen = Math.floor(Math.random()*(tempRed-64));
+    }
+    var green = tempGreen.toString(16).padStart(2, '0');
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_green_color').click(function(){
-    var red = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
+    var tempGreen = Math.floor(Math.random()*192+64)
+    var green = tempGreen.toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*(tempGreen-64));
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    var tempRed = Math.floor(Math.random()*(tempGreen-64));
+    while (Math.abs(tempBlue - tempRed) > 32) {
+      tempRed = Math.floor(Math.random()*(tempGreen-64));
+    }
+    var red = tempRed.toString(16).padStart(2, '0');
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_blue_color').click(function(){
-    var red = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*192+64);
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    //green can be at most the same as blue
+    var tempGreen = Math.floor(Math.random()*tempBlue);
+    var green = tempGreen.toString(16).padStart(2, '0');
+    //red can be at most the same as green
+    var red = Math.floor(Math.random()*tempGreen).toString(16).padStart(2, '0');
     var color = '#' + red  + green+ blue;
     changeBackgroundColor(color);
   });
