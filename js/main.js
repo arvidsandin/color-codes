@@ -89,23 +89,39 @@ $(document).ready(function() {
     changeBackgroundColor(color);
   });
   $('#random_red_color').click(function(){
-    var red = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
+    var tempRed = Math.floor(Math.random()*192+64)
+    var red = tempRed.toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*(tempRed-64));
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    var tempGreen = Math.floor(Math.random()*(tempRed-64));
+    while (Math.abs(tempBlue - tempGreen) > 32) {
+      tempGreen = Math.floor(Math.random()*(tempRed-64));
+    }
+    var green = tempGreen.toString(16).padStart(2, '0');
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_green_color').click(function(){
-    var red = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
+    var tempGreen = Math.floor(Math.random()*192+64)
+    var green = tempGreen.toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*(tempGreen-64));
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    var tempRed = Math.floor(Math.random()*(tempGreen-64));
+    while (Math.abs(tempBlue - tempRed) > 32) {
+      tempRed = Math.floor(Math.random()*(tempGreen-64));
+    }
+    var red = tempRed.toString(16).padStart(2, '0');
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_blue_color').click(function(){
-    var red = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var green = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var blue = Math.floor(Math.random()*128+128).toString(16).padStart(2, '0');
+    var tempBlue = Math.floor(Math.random()*192+64);
+    var blue = tempBlue.toString(16).padStart(2, '0');
+    //green can be at most the same as blue
+    var tempGreen = Math.floor(Math.random()*tempBlue);
+    var green = tempGreen.toString(16).padStart(2, '0');
+    //red can be at most the same as green
+    var red = Math.floor(Math.random()*tempGreen).toString(16).padStart(2, '0');
     var color = '#' + red  + green+ blue;
     changeBackgroundColor(color);
   });
