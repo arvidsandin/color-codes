@@ -60,11 +60,11 @@ input{
   margin: 0 38%;
   margin-top: 10px;
 }
-#tints{
+#tints, #shades{
   width: 100%;
   overflow: auto
 }
-.tint{
+.tint, .shade{
   height: 100px;
   width: 9.1%;
   margin: 2px;
@@ -72,19 +72,13 @@ input{
   background-color: #fff;
   float: left;
 }
-#shades{
-  width: 100%;
-  overflow: auto
-}
-.shade{
-  height: 100px;
-  width: 9.1%;
-  margin: 2px;
-  border: solid 2px #000;
-  background-color: #fff;
-  float: left;
+.tint:hover, .shade:hover{
+  cursor:pointer;
 }
 
+button:hover{
+  cursor: pointer;
+}
 #random_color{
   width: 24%;
   margin: 10px 38%;

@@ -41,6 +41,14 @@ function isLightColor(color){
   return 128 * 3 < parseInt(color.substring(1, 3), 16) + parseInt(color.substring(3, 5), 16) + parseInt(color.substring(5, 7), 16)
 }
 
+function hex(x) {
+  return ("0" + parseInt(x).toString(16)).slice(-2);
+}
+function rgb2hex(rgb) {
+   rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+   return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
+
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
   $('.rgb_input').val(255);
@@ -68,6 +76,12 @@ $(document).ready(function() {
     }
     $('.rgb_input').css('background-color', 'rgba(255, 255, 255, 0.5)');
     changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
+  });
+
+  $('.tint, .shade').click(function(){
+    var chosenColor = rgb2hex($(this).css('backgroundColor'))
+    $('#hex_input').val(chosenColor);
+    changeBackgroundColor(chosenColor);
   });
 
   $('#random_color').click(function(){
