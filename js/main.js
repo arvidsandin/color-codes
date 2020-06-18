@@ -10,6 +10,7 @@ function changeBackgroundColor(color){
     $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
     $("#current_color").css('background-color', color);
+    $('#current_color_name')[0].innerHTML = color;
     $('.tint')[0].style.backgroundColor = color;
     $('.shade')[0].style.backgroundColor = color;
     $('.tint_name')[0].innerHTML = color;
