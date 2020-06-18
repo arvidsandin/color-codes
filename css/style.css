@@ -11,6 +11,7 @@ p{
 }
 h3{
   text-align: center;
+  font-size: 14pt;
 }
 #background{
   min-height: 100vh;
@@ -24,8 +25,8 @@ h3{
   width: 60%;
   margin: 60px auto;
   padding: 3%;
-  background-color: #ffffff;
-  border: solid 2px black;
+  background-color: #fafafa;
+  border: solid 3px #777;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -60,6 +61,26 @@ input{
   margin: 0 38%;
   margin-top: 10px;
 }
+
+#current_color_container{
+  margin: auto;
+  padding: 10px 50px;
+  height: 20%;
+  display: flex;
+  align-items: center;
+}
+#current_color{
+  background-color: #fff;
+  border: solid 2px black;
+  width: 25%;
+  height: 100%;
+  margin: 0 10px;
+}
+#current_color_name{
+  color: #222;
+  margin: 0 10px;
+}
+
 #tints, #shades{
   width: 100%;
   overflow: auto
