@@ -7,8 +7,9 @@ function changeBackgroundColor(color){
     var red = parseInt(color.substring(1, 3), 16);
     var green = parseInt(color.substring(3, 5), 16);
     var blue = parseInt(color.substring(5, 7), 16);
-    $('#hex_input').css('background-color', 'rgba(255, 255, 255, 0.5)');
+    $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
+    $("#current_color").css('background-color', color);
     $('.tint')[0].style.backgroundColor = color;
     $('.shade')[0].style.backgroundColor = color;
     $('.tint_name')[0].innerHTML = color;
@@ -40,7 +41,7 @@ function changeBackgroundColor(color){
     $('#b_input').val(blue);
   }
   else {
-    $('#hex_input').css('background-color', 'rgba(255, 0, 0, 064)');
+    $('#hex_input').css('background-color', '#ff4747');
   }
 }
 
