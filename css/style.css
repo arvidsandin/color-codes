@@ -65,7 +65,7 @@ input{
 #current_color_container{
   margin: auto;
   padding: 10px 50px;
-  height: 20%;
+  height: 22%;
   display: flex;
   align-items: center;
 }
@@ -79,6 +79,21 @@ input{
 #current_color_name{
   color: #222;
   margin: 0 10px;
+  width: 43pt;
+}
+#random_color_buttons{
+  width: 35%;
+  max-height: 100%;
+  margin: auto;
+  text-align: center;
+  overflow: auto;
+}
+#random_color_buttons h3{
+  margin: auto;
+  margin-top: 10px;
+}
+#random_color{
+  margin: auto;
 }
 
 #tints, #shades{
@@ -111,12 +126,4 @@ input{
 
 button:hover{
   cursor: pointer;
-}
-#random_color{
-  width: 24%;
-  margin: 10px 38%;
-}
-#random_specific_color{
-  width: 25%;
-  margin: auto;
 }
