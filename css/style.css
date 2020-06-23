@@ -22,8 +22,8 @@ h3{
 }
 
 #center{
-  width: 60%;
-  margin: 60px auto;
+  width: 90%;
+  margin: 20px auto;
   padding: 3%;
   background-color: #fafafa;
   border: solid 3px #777;
@@ -64,15 +64,16 @@ input{
 
 #current_color_container{
   margin: auto;
-  padding: 10px 50px;
-  height: 22%;
+  padding: 10px;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 #current_color{
   background-color: #fff;
   border: solid 2px black;
-  width: 25%;
+  width: 100%;
+  min-height: 75px;
   height: 100%;
   margin: 0 10px;
 }
@@ -80,9 +81,9 @@ input{
   color: #222;
   margin: 0 10px;
   width: 43pt;
+  visibility: hidden;
 }
 #random_color_buttons{
-  width: 35%;
   max-height: 100%;
   margin: auto;
   text-align: center;
@@ -98,16 +99,17 @@ input{
 
 #tints, #shades{
   width: 100%;
-  overflow: auto
+  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .tint, .shade{
-  height: 100px;
-  width: 9.1%;
   margin: 2px;
   border: solid 2px #000;
   background-color: #fff;
-  float: left;
   text-align: center;
+  flex: 1 1 50px;
 }
 .tint:hover, .shade:hover{
   cursor:pointer;
@@ -115,7 +117,7 @@ input{
 .tint_name, .shade_name{
   margin: 0;
   /*line-height same as .tint, .shade height */
-  line-height: 100px;
+  line-height: 50px;
 }
 .tint_name{
   color: #000;
@@ -126,4 +128,35 @@ input{
 
 button:hover{
   cursor: pointer;
+}
+@media only screen and (min-width: 600px) {
+  #center{
+    width: 60%;
+    margin: 60px auto;
+  }
+  #current_color_container{
+    /* width: 35%; */
+    height: 22%;
+    padding: 10px 50px;
+    flex-direction: row;
+  }
+  #current_color{
+    width: 25%;
+  }
+  #current_color_name{
+    color: #222;
+    margin: 0 10px;
+    width: 43pt;
+    visibility: visible;
+  }
+  #tints, #shades{
+  flex-direction: row;
+  }
+  .tint, .shade{
+    height: 100px;
+    flex: 1 1 9.5%;
+  }
+  .tint_name, .shade_name{
+    line-height: 100px;
+  }
 }
