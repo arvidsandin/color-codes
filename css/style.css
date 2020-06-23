@@ -61,9 +61,9 @@ input{
 }
 
 #hex_input{
-  width: 24%;
-  margin: 0 38%;
-  margin-top: 10px;
+  width: 40%;
+  margin: 10px 30% 0;
+  /* margin-top: 10px; */
 }
 
 #current_color_container{
@@ -142,6 +142,10 @@ button:hover{
     width: 60%;
     min-width: 600px;
     margin: 60px auto;
+  }
+  #hex_input{
+    width: 24%;
+    margin: 10px 38% 0;
   }
   #current_color_container{
     /* width: 35%; */
