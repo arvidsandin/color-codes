@@ -12,6 +12,10 @@ p{
 h3{
   text-align: center;
   font-size: 14pt;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #background{
   min-height: 100vh;
@@ -118,6 +122,10 @@ input{
   margin: 0;
   /*line-height same as .tint, .shade height */
   line-height: 50px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .tint_name{
   color: #000;
