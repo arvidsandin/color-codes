@@ -101,24 +101,24 @@ input{
   margin: auto;
 }
 
-#tints, #shades{
+#tints, #shades, #tones{
   width: 100%;
   overflow: auto;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
-.tint, .shade{
+.tint, .shade, .tone{
   margin: 2px;
   border: solid 2px #000;
   background-color: #fff;
   text-align: center;
   flex: 1 1 50px;
 }
-.tint:hover, .shade:hover{
+.tint:hover, .shade:hover, .tone:hover{
   cursor:pointer;
 }
-.tint_name, .shade_name{
+.tint_name, .shade_name, .tone_name{
   margin: 0;
   /*line-height same as .tint, .shade height */
   line-height: 50px;
@@ -127,7 +127,7 @@ input{
   -ms-user-select: none;
   user-select: none;
 }
-.tint_name{
+.tint_name, .tone_name{
   color: #000;
 }
 .shade_name{
@@ -162,14 +162,14 @@ button:hover{
     width: 43pt;
     visibility: visible;
   }
-  #tints, #shades{
+  #tints, #shades, #tones{
   flex-direction: row;
   }
-  .tint, .shade{
+  .tint, .shade, .tone{
     height: 100px;
     flex: 1 1 9.5%;
   }
-  .tint_name, .shade_name{
+  .tint_name, .shade_name, .tone_name{
     line-height: 100px;
   }
 }
