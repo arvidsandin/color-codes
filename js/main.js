@@ -18,11 +18,14 @@ function changeBackgroundColor(color){
     if (isLightColor(color)){
         $('.tint_name')[0].style.color = ('#000');
         $('.shade_name')[0].style.color = ('#000');
+        $('.tone_name').css('color', '#000');
     }
     else {
       $('.tint_name')[0].style.color = ('#fff');
       $('.shade_name')[0].style.color = ('#fff');
+      $('.tone_name').css('color', '#fff');
     }
+    //Color the tints
     for (var i = 0; i < $('.tint').length-1; i++) {
       var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
       var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
@@ -30,12 +33,19 @@ function changeBackgroundColor(color){
       $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
       $('.tint_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
     }
+    //Color the shades
     for (var i = 0; i < $('.shade').length-1; i++) {
       var tempRed = Math.round(red*1/1.1**(i+1));
       var tempGreen = Math.round(green*1/1.1**(i+1));
       var tempBlue =Math.round(blue*1/1.1**(i+1));
       $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
       $('.shade_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
+    }
+    //Color the tones
+    for (var i = 0; i < $('.tone').length; i++) {
+      var newColor = applySaturationToHexColor(color, (i/$('.tone').length)*100);
+      $('.tone')[i].style.backgroundColor = newColor;
+      $('.tone_name')[i].innerHTML = newColor;
     }
     $('#r_input').val(red);
     $('#g_input').val(green);
@@ -59,9 +69,68 @@ function hex(x) {
   return ("0" + parseInt(x).toString(16)).slice(-2);
 }
 function rgb2hex(rgb) {
-   rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
-   return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-  }
+  rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(,\s*\d+\.*\d+)?\)$/);
+  return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+function applySaturationToHexColor(hex, saturationPercent) {
+    if (!/^#([0-9a-f]{6})$/i.test(hex)) {
+        throw('Unexpected color format');
+    }
+
+    if (saturationPercent < 0 || saturationPercent > 100) {
+        throw('Unexpected color format');
+    }
+
+    var saturationFloat   = saturationPercent / 100,
+        rgbIntensityFloat = [
+            parseInt(hex.substr(1,2), 16) / 255,
+            parseInt(hex.substr(3,2), 16) / 255,
+            parseInt(hex.substr(5,2), 16) / 255
+        ];
+
+    var rgbIntensityFloatSorted = rgbIntensityFloat.slice(0).sort(function(a, b){ return a - b; }),
+        maxIntensityFloat       = rgbIntensityFloatSorted[2],
+        mediumIntensityFloat    = rgbIntensityFloatSorted[1],
+        minIntensityFloat       = rgbIntensityFloatSorted[0];
+
+    if (maxIntensityFloat == minIntensityFloat) {
+        // All colors have same intensity, which means
+        // the original color is gray, so we can't change saturation.
+        return hex;
+    }
+
+    // New color max intensity wont change. Lets find medium and weak intensities.
+    var newMediumIntensityFloat,
+        newMinIntensityFloat = maxIntensityFloat * (1 - saturationFloat);
+
+    if (mediumIntensityFloat == minIntensityFloat) {
+        // Weak colors have equal intensity.
+        newMediumIntensityFloat = newMinIntensityFloat;
+    }
+    else {
+        // Calculate medium intensity with respect to original intensity proportion.
+        var intensityProportion = (maxIntensityFloat - mediumIntensityFloat) / (mediumIntensityFloat - minIntensityFloat);
+        newMediumIntensityFloat = (intensityProportion * newMinIntensityFloat + maxIntensityFloat) / (intensityProportion + 1);
+    }
+
+    var newRgbIntensityFloat       = [],
+        newRgbIntensityFloatSorted = [newMinIntensityFloat, newMediumIntensityFloat, maxIntensityFloat];
+
+    // We've found new intensities, but we have then sorted from min to max.
+    // Now we have to restore original order.
+    rgbIntensityFloat.forEach(function(originalRgb) {
+        var rgbSortedIndex = rgbIntensityFloatSorted.indexOf(originalRgb);
+        newRgbIntensityFloat.push(newRgbIntensityFloatSorted[rgbSortedIndex]);
+    });
+
+    var floatToHex = function(val) { return ('0' + Math.round(val * 255).toString(16)).substr(-2); },
+        rgb2hex    = function(rgb) { return '#' + floatToHex(rgb[0]) + floatToHex(rgb[1]) + floatToHex(rgb[2]); };
+
+    var newHex = rgb2hex(newRgbIntensityFloat);
+
+    return newHex;
+}
 
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
