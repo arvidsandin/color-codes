@@ -66,6 +66,9 @@ function isLightColor(color){
 }
 
 function hex(x) {
+  if (x < 0 || x > 255) {
+      console.warn("Faulty conversion from decimal to hex");
+  }
   return ("0" + parseInt(x).toString(16)).slice(-2);
 }
 function rgb2hex(rgb) {
@@ -155,7 +158,7 @@ $(document).ready(function() {
         $('.rgb_input').css('background-color', 'rgba(255, 0, 0, 0.6)');
         return
       }
-      rgb[i] = Math.floor(rgb[i]).toString(16).padStart(2, '0')
+      rgb[i] = hex(Math.floor(rgb[i]));
     }
     $('.rgb_input').css('background-color', 'rgba(255, 255, 255, 0.5)');
     changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
@@ -173,38 +176,38 @@ $(document).ready(function() {
   });
   $('#random_red_color').click(function(){
     var tempRed = Math.floor(Math.random()*192+64)
-    var red = tempRed.toString(16).padStart(2, '0');
+    var red = hex(tempRed);
     var tempBlue = Math.floor(Math.random()*(tempRed-64));
-    var blue = tempBlue.toString(16).padStart(2, '0');
+    var blue = hex(tempBlue);
     var tempGreen = Math.floor(Math.random()*(tempRed-64));
     while (Math.abs(tempBlue - tempGreen) > 32) {
       tempGreen = Math.floor(Math.random()*(tempRed-64));
     }
-    var green = tempGreen.toString(16).padStart(2, '0');
+    var green = hex(tempGreen);
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_green_color').click(function(){
     var tempGreen = Math.floor(Math.random()*192+64)
-    var green = tempGreen.toString(16).padStart(2, '0');
+    var green = hex(tempGreen);
     var tempBlue = Math.floor(Math.random()*(tempGreen-64));
-    var blue = tempBlue.toString(16).padStart(2, '0');
+    var blue = hex(tempBlue);
     var tempRed = Math.floor(Math.random()*(tempGreen-64));
     while (Math.abs(tempBlue - tempRed) > 32) {
       tempRed = Math.floor(Math.random()*(tempGreen-64));
     }
-    var red = tempRed.toString(16).padStart(2, '0');
+    var red = hex(tempRed);
     var color = '#' + red + green + blue;
     changeBackgroundColor(color);
   });
   $('#random_blue_color').click(function(){
     var tempBlue = Math.floor(Math.random()*192+64);
-    var blue = tempBlue.toString(16).padStart(2, '0');
-    //green can be at most the same as blue 
+    var blue = hex(tempBlue);
+    //green can be at most the same as blue
     var tempGreen = Math.floor(Math.random()*tempBlue);
-    var green = tempGreen.toString(16).padStart(2, '0');
+    var green = hex(tempGreen);
     //red can be at most the same as green and at most 48 less than blue
-    var red = Math.floor(Math.random()*Math.min(tempGreen, tempBlue-48)).toString(16).padStart(2, '0');
+    var red = hex(Math.floor(Math.random()*Math.min(tempGreen, tempBlue-48)));
     var color = '#' + red  + green+ blue;
     changeBackgroundColor(color);
   });
@@ -214,8 +217,8 @@ $(document).ready(function() {
     while (Math.abs(red - green) > 32) {
       green = Math.random()*96+160;
     }
-    var blue = Math.floor(Math.random()*64).toString(16).padStart(2, '0');
-    var color = '#' + Math.floor(red).toString(16).padStart(2, '0')  + Math.floor(green).toString(16).padStart(2, '0') + blue;
+    var blue = hex(Math.floor(Math.random()*64));
+    var color = '#' + hex(Math.floor(red))  + hex(Math.floor(green)) + blue;
     changeBackgroundColor(color);
   });
 });
