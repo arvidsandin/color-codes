@@ -20,22 +20,6 @@ h3, h2{
 h3{
   margin: 10px auto 5px;
 }
-#background{
-  min-height: 100vh;
-  height: auto;
-  width: 100%;
-  float: left;
-  background-color: #fff
-}
-
-#center{
-  width: 90%;
-  margin: 20px auto;
-  padding: 3%;
-  background-color: #fafafa;
-  border: solid 3px #777;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -52,6 +36,45 @@ input{
   border: solid 1px #333;
   box-shadow: 1px 1px rgba(64, 64, 64, 0.3);
 }
+
+button {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1pt 1pt rgba(64, 64, 64, 0.3);
+    padding: 0.4em;
+    background: #dedede;
+    color: #000;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out,
+                /* transform 150ms ease; */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+button:hover{
+    box-shadow: 1pt 1pt rgba(64, 64, 64, 0.4), inset 0 0 10px 100px rgba(0,0,0,.1);
+}
+button:active{
+  transform: scale(0.98);
+}
+
+#background{
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  float: left;
+  background-color: #fff
+}
+
+#center{
+  width: 90%;
+  margin: 20px auto;
+  padding: 3%;
+  background-color: #fafafa;
+  border: solid 3px #777;
+}
+
 #rgb_inputs{
   width: calc(51pt * 3  + 2px * 3 + 5px);
   margin: 10px auto;
@@ -72,7 +95,7 @@ input{
 #current_color_container{
   margin: auto;
   padding: 10px;
-  min-height: 105px;
+  min-height: 125px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -95,10 +118,22 @@ input{
   max-height: 100%;
   margin: auto;
   text-align: center;
-  overflow: auto;
+  overflow: visible;
 }
 #random_color{
   margin: auto;
+}
+#random_red_color{
+  background: #ded0d0;
+}
+#random_green_color{
+  background: #d0ded0;
+}
+#random_blue_color{
+  background: #d0d0de;
+}
+#random_yellow_color{
+  background: #e3e3c9;
 }
 
 #tints, #shades, #tones{
@@ -135,9 +170,6 @@ input{
   color: #fff;
 }
 
-button:hover{
-  cursor: pointer;
-}
 @media only screen and (min-width: 650px) {
   #center{
     width: 60%;
