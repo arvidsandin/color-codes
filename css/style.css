@@ -9,13 +9,16 @@ body{
 p{
   margin: 8px;
 }
-h3{
+h3, h2{
   text-align: center;
   font-size: 14pt;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+h3{
+  margin: 10px auto 5px;
 }
 #background{
   min-height: 100vh;
@@ -69,6 +72,7 @@ input{
 #current_color_container{
   margin: auto;
   padding: 10px;
+  min-height: 105px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -93,10 +97,6 @@ input{
   text-align: center;
   overflow: auto;
 }
-#random_color_buttons h3{
-  margin: auto;
-  margin-top: 10px;
-}
 #random_color{
   margin: auto;
 }
@@ -113,15 +113,16 @@ input{
   border: solid 2px #000;
   background-color: #fff;
   text-align: center;
+  display: flex;
   flex: 1 1 50px;
+  align-items: center;
+  justify-content: center;
 }
 .tint:hover, .shade:hover, .tone:hover{
   cursor:pointer;
 }
 .tint_name, .shade_name, .tone_name{
   margin: 0;
-  /*line-height same as .tint, .shade height */
-  line-height: 50px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -163,13 +164,10 @@ button:hover{
     visibility: visible;
   }
   #tints, #shades, #tones{
-  flex-direction: row;
+    flex-direction: row;
   }
   .tint, .shade, .tone{
     height: 100px;
     flex: 1 1 9.5%;
-  }
-  .tint_name, .shade_name, .tone_name{
-    line-height: 100px;
   }
 }
