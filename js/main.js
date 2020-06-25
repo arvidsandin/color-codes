@@ -200,11 +200,11 @@ $(document).ready(function() {
   $('#random_blue_color').click(function(){
     var tempBlue = Math.floor(Math.random()*192+64);
     var blue = tempBlue.toString(16).padStart(2, '0');
-    //green can be at most the same as blue
+    //green can be at most the same as blue 
     var tempGreen = Math.floor(Math.random()*tempBlue);
     var green = tempGreen.toString(16).padStart(2, '0');
-    //red can be at most the same as green
-    var red = Math.floor(Math.random()*tempGreen).toString(16).padStart(2, '0');
+    //red can be at most the same as green and at most 48 less than blue
+    var red = Math.floor(Math.random()*Math.min(tempGreen, tempBlue-48)).toString(16).padStart(2, '0');
     var color = '#' + red  + green+ blue;
     changeBackgroundColor(color);
   });
