@@ -164,7 +164,7 @@ button:hover{
     visibility: visible;
   }
   #tints, #shades, #tones{
-  flex-direction: row;
+    flex-direction: row;
   }
   .tint, .shade, .tone{
     height: 100px;
