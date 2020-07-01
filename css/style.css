@@ -104,8 +104,8 @@ button:active{
   background-color: #fff;
   border: solid 2px black;
   width: 100%;
+  height: 33%;
   min-height: 75px;
-  height: 100%;
   margin: 0 10px;
 }
 #current_color_name{
@@ -188,6 +188,7 @@ button:active{
   }
   #current_color{
     width: 25%;
+    height: 100%;
   }
   #current_color_name{
     color: #222;
