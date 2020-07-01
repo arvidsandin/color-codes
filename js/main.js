@@ -47,12 +47,13 @@ function changeBackgroundColor(color){
       $('.tone')[i].style.backgroundColor = newColor;
       $('.tone_name')[i].innerHTML = newColor;
     }
+    $('.rgb_input').css('background-color', '#fff');
     $('#r_input').val(red);
     $('#g_input').val(green);
     $('#b_input').val(blue);
   }
   else {
-    $('#hex_input').css('background-color', '#ff4747');
+    $('#hex_input').css('background-color', '#ff6464');
   }
 }
 
@@ -142,26 +143,61 @@ $(document).ready(function() {
 
   $('#hex_input').keyup(function() {
     var color = $('#hex_input').val();
-    if (color.charAt(0) != '#'){
-      color = '#' + color;
+    setTimeout(() => {
+      //if unchanged after 1.5 s, update page
+      if (color == $('#hex_input').val()) {
+        if (color.charAt(0) != '#'){
+          color = '#' + color;
+        }
+        changeBackgroundColor(color);
+      }
+    }, 1500);
+  });
+  //on Enter keypress
+  $('#hex_input').keypress(function(e) {
+    if(e.which == 13) {
+      var color = $('#hex_input').val();
+      if (color.charAt(0) != '#'){
+        color = '#' + color;
+      }
+      changeBackgroundColor(color);
     }
-    changeBackgroundColor(color);
   });
 
   $('.rgb_input').keyup(function() {
-    var red = $('#r_input').val();
-    var green = $('#g_input').val();
-    var blue = $('#b_input').val();
-    var rgb = [red, green, blue];
-    for (var i = 0; i < 3; i++) {
-      if (rgb[i] < 0 || rgb[i] > 255) {
-        $('.rgb_input').css('background-color', 'rgba(255, 0, 0, 0.6)');
-        return
+    var rgb = [$('#r_input').val(), $('#g_input').val(), $('#b_input').val()];
+    setTimeout(() => {
+      //if unchanged after 1.5 s, update page
+      if (rgb[0] == $('#r_input').val() && rgb[1] == $('#g_input').val() && rgb[2] == $('#b_input').val()) {
+        for (var i = 0; i < 3; i++) {
+          if (rgb[i] < 0 || rgb[i] > 255) {
+            $('.rgb_input').css('background-color', '#ff6464');
+            return
+          }
+          rgb[i] = hex(Math.floor(rgb[i]));
+        }
+        $('.rgb_input').css('background-color', '#ffffff');
+        changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
       }
-      rgb[i] = hex(Math.floor(rgb[i]));
+    }, 1500);
+  });
+  //on Enter keypress
+  $('.rgb_input').keypress(function(e) {
+    if(e.which == 13) {
+      var red = $('#r_input').val();
+      var green = $('#g_input').val();
+      var blue = $('#b_input').val();
+      var rgb = [red, green, blue];
+      for (var i = 0; i < 3; i++) {
+        if (rgb[i] < 0 || rgb[i] > 255) {
+          $('.rgb_input').css('background-color', 'rgba(255, 0, 0, 0.6)');
+          return
+        }
+        rgb[i] = hex(Math.floor(rgb[i]));
+      }
+      $('.rgb_input').css('background-color', '#fff');
+      changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
     }
-    $('.rgb_input').css('background-color', 'rgba(255, 255, 255, 0.5)');
-    changeBackgroundColor('#' + rgb[0] + rgb[1] + rgb[2]);
   });
 
   $('.tint, .shade, .tone').click(function(){
