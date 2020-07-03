@@ -64,6 +64,17 @@ button:active{
   transform: scale(0.98);
 }
 
+#background{
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  float: left;
+  background-color: #fff;
+}
+#flex_container{
+  display: flex;
+  padding: 10px 0;
+}
 .top_bar{
   display: flex;
   justify-content: space-between;
@@ -74,6 +85,7 @@ button:active{
   line-height: 40px;
   padding: 0 20px;
   box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 4px -4px rgba(0,0,0,0.3);
   white-space:nowrap;
   overflow-x: auto;
 }
@@ -87,19 +99,30 @@ button:active{
 #dropdown{
 }
 #dropdown_icon:hover{
-  cursor: pointer;;
+  cursor: pointer;
 }
-#background{
-  min-height: 100vh;
-  height: auto;
-  width: 100%;
-  float: left;
-  background-color: #fff
+#color_history_bar{
+  display: none;
+  justify-content: flex-start;
+}
+#history_icon{
+  line-height: 40px;
+  display: inline-block;
+  font-size: 1.6em;
+}
+#color_history_column{
+  display: none;
+}
+.previous_color{
+  height: 38px;
+  width: 40px;
+  margin: 1px 2px;
+  border: 1px solid black;
 }
 
 #center{
   width: 90%;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 3%;
   background-color: #fafafa;
   border: solid 3px #777;
@@ -204,10 +227,16 @@ button:active{
   #dropdown{
     display: none;
   }
+  #color_history_column{
+    display: flex;
+  }
+  #flex_container{
+    padding: 20px 0;
+  }
   #center{
     width: 60%;
     min-width: 600px;
-    margin: 60px auto;
+    margin: 0 auto;
   }
   #hex_input{
     width: 24%;

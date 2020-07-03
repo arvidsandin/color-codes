@@ -136,10 +136,23 @@ function applySaturationToHexColor(hex, saturationPercent) {
   return newHex;
 }
 
+var showMobileViewHistory = false;
+
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
   $('.rgb_input').val(255);
   changeBackgroundColor('#ffffff');
+
+  $('#dropdown').on('click', function () {
+    showMobileViewHistory = !showMobileViewHistory;
+    if (showMobileViewHistory) {
+      $('#color_history_bar').css('display', 'flex');
+    }
+    else {
+      $('#color_history_bar').hide();
+
+    }
+  });
 
   $('#hex_input').keyup(function() {
     var color = $('#hex_input').val();

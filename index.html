@@ -29,70 +29,79 @@
         <i id="dropdown_icon" class=" fi fi-line-angle-down"></i>
       </div>
     </div>
-    <div id="center">
-      <input id="hex_input" type="text" value="#ffffff">
-      <br>
-      <div id="rgb_inputs">
-        <input id="r_input" class="rgb_input" type="number" max=255 min=0 value=255>
-        <input id="g_input" class="rgb_input" type="number" max=255 min=0 value=255>
-        <input id="b_input" class="rgb_input" type="number" max=255 min=0 value=255>
+    <div id="color_history_bar" class="top_bar color_history">
+      <i id="history_icon" class=" fi fi-history"></i>
+      <div style="background: white" class="previous_color"></div>
+    </div>
+    <div id="flex_container">
+      <div id="color_history_column" class="color_history">
+        <div style="background: white" class="previous_color"></div>
       </div>
-      <div id="current_color_container">
-        <div id="current_color"></div>
-        <h4 id="current_color_name">#ffffff</h4>
-        <div id="random_color_buttons">
-          <button id="random_color" type="button">Random Color</button>
-          <h3>Random shade of:</h3>
-          <button id="random_red_color" class="random_color_color" type="button" value="ff0000">Red</button>
-          <button id="random_green_color" class="random_color_color" type="button" value="00ff00">Green</button>
-          <button id="random_blue_color" class="random_color_color" type="button" value="0000ff">Blue</button>
-          <button id="random_yellow_color" class="random_color_color" type="button" value="ffff00">Yellow</button>
+      <div id="center">
+        <input id="hex_input" type="text" value="#ffffff">
+        <br>
+        <div id="rgb_inputs">
+          <input id="r_input" class="rgb_input" type="number" max=255 min=0 value=255>
+          <input id="g_input" class="rgb_input" type="number" max=255 min=0 value=255>
+          <input id="b_input" class="rgb_input" type="number" max=255 min=0 value=255>
         </div>
-      </div>
-      <h2>Shades</h2>
-      <div id="shades">
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-        <div class="shade"><p class="shade_name"></p></div>
-      </div>
-      <br>
-      <h2>Tints</h2>
-      <div id="tints">
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-        <div class="tint"><p class="tint_name"></p></div>
-      </div>
-      <br>
-      <h2>Tones</h2>
-      <div id="tones">
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
-        <div class="tone"><p class="tone_name"></p></div>
+        <div id="current_color_container">
+          <div id="current_color"></div>
+          <h4 id="current_color_name">#ffffff</h4>
+          <div id="random_color_buttons">
+            <button id="random_color" type="button">Random Color</button>
+            <h3>Random shade of:</h3>
+            <button id="random_red_color" class="random_color_color" type="button" value="ff0000">Red</button>
+            <button id="random_green_color" class="random_color_color" type="button" value="00ff00">Green</button>
+            <button id="random_blue_color" class="random_color_color" type="button" value="0000ff">Blue</button>
+            <button id="random_yellow_color" class="random_color_color" type="button" value="ffff00">Yellow</button>
+          </div>
+        </div>
+        <h2>Shades</h2>
+        <div id="shades">
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+          <div class="shade"><p class="shade_name"></p></div>
+        </div>
+        <br>
+        <h2>Tints</h2>
+        <div id="tints">
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+          <div class="tint"><p class="tint_name"></p></div>
+        </div>
+        <br>
+        <h2>Tones</h2>
+        <div id="tones">
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+          <div class="tone"><p class="tone_name"></p></div>
+        </div>
       </div>
     </div>
   </div>
   <script data-goatcounter="https://arvidsandin.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
