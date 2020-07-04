@@ -7,6 +7,7 @@ function changeBackgroundColor(color){
     var red = parseInt(color.substring(1, 3), 16);
     var green = parseInt(color.substring(3, 5), 16);
     var blue = parseInt(color.substring(5, 7), 16);
+    pushToHistory($('#background').css('background-color'));
     $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
     $("#current_color").css('background-color', color);
@@ -55,6 +56,17 @@ function changeBackgroundColor(color){
   else {
     $('#hex_input').css('background-color', '#ff6464');
   }
+}
+
+function pushToHistory(color){
+  //Add to mobile page
+  var lastColor = $('.previous_color_bar').first();
+  var newLastColor = lastColor.clone();
+  newLastColor.css('background-color', color);
+  $('#history_icon').after(newLastColor);
+  console.log(lastColor, newLastColor);
+  //Add to desktop
+  $('#color_history_column').prepend(newLastColor.clone());
 }
 
 function isColor(strColor){
@@ -152,6 +164,12 @@ $(document).ready(function() {
       $('#color_history_bar').hide();
 
     }
+  });
+  $('.color_history').on('click', '.previous_color', function () {
+    console.log("helloo");
+    var hex = rgb2hex($(this).css('background-color'));
+    changeBackgroundColor(hex);
+    $(this).remove();
   });
 
   $('#hex_input').keyup(function() {
