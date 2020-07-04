@@ -11,19 +11,19 @@ function changeBackgroundColor(color){
     $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
     $("#current_color").css('background-color', color);
-    $('#current_color_name')[0].innerHTML = color;
-    $('.tint')[0].style.backgroundColor = color;
-    $('.shade')[0].style.backgroundColor = color;
-    $('.tint_name')[0].innerHTML = color;
-    $('.shade_name')[0].innerHTML = color;
+    $('#current_color_name').first().text(color);
+    $('.tint').first().css('background-color', color);
+    $('.shade').first().css('background-color', color);
+    $('.tint_name').first().text(color);
+    $('.shade_name').first().text(color);
     if (isLightColor(color)){
-      $('.tint_name')[0].style.color = ('#000');
-      $('.shade_name')[0].style.color = ('#000');
+      $('.tint_name').first().css('color',  '#000');
+      $('.shade_name').first().css('color',  '#000');
       $('.tone_name').css('color', '#000');
     }
     else {
-      $('.tint_name')[0].style.color = ('#fff');
-      $('.shade_name')[0].style.color = ('#fff');
+      $('.tint_name').first().css('color',  '#fff');
+      $('.shade_name').first().css('color',  '#fff');
       $('.tone_name').css('color', '#fff');
     }
     //Color the tints
@@ -31,22 +31,22 @@ function changeBackgroundColor(color){
       var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
       var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
       var tempBlue = blue + Math.round((255 - blue)*1/1.2**($('.tint').length - i-1));
-      $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
-      $('.tint_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
+      $('.tint').eq(i+1).css('background-color', 'rgb('+tempRed+','+tempGreen+','+tempBlue+')');
+      $('.tint_name').eq(i+1).text('#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue));
     }
     //Color the shades
     for (var i = 0; i < $('.shade').length-1; i++) {
       var tempRed = Math.round(red*1/1.1**(i+1));
       var tempGreen = Math.round(green*1/1.1**(i+1));
       var tempBlue =Math.round(blue*1/1.1**(i+1));
-      $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
-      $('.shade_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
+      $('.shade').eq(i+1).css('background-color', 'rgb('+tempRed+','+tempGreen+','+tempBlue+')');
+      $('.shade_name').eq(i+1).text('#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue));
     }
     //Color the tones
     for (var i = 0; i < $('.tone').length; i++) {
       var newColor = applySaturationToHexColor(color, (i/$('.tone').length)*100);
-      $('.tone')[i].style.backgroundColor = newColor;
-      $('.tone_name')[i].innerHTML = newColor;
+      $('.tone').eq(i).css('background-color', newColor);
+      $('.tone_name').eq(i).text(newColor);
     }
     $('.rgb_input').css('background-color', '#fff');
     $('#r_input').val(red);
@@ -64,7 +64,6 @@ function pushToHistory(color){
   var newLastColor = lastColor.clone();
   newLastColor.css('background-color', color);
   $('#history_icon').after(newLastColor);
-  console.log(lastColor, newLastColor);
   //Add to desktop
   $('#color_history_column').prepend(newLastColor.clone());
 }
@@ -166,7 +165,6 @@ $(document).ready(function() {
     }
   });
   $('.color_history').on('click', '.previous_color', function () {
-    console.log("helloo");
     var hex = rgb2hex($(this).css('background-color'));
     changeBackgroundColor(hex);
     $(this).remove();
