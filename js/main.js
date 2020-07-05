@@ -65,7 +65,14 @@ function pushToHistory(color){
   newLastColor.css('background-color', color);
   $('#history_icon').after(newLastColor);
   //Add to desktop
+  lastColor = $('.previous_color_column').first();
+  newLastColor = lastColor.clone();
+  newLastColor.css('background-color', color);
   $('#color_history_column').prepend(newLastColor.clone());
+  if ($('.previous_color_bar').length > 16){
+    $('.previous_color_bar').last().remove();
+    $('.previous_color_column').last().remove();
+  }
 }
 
 function isColor(strColor){
