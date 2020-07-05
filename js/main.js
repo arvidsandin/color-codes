@@ -69,8 +69,11 @@ function pushToHistory(color){
   newLastColor = lastColor.clone();
   newLastColor.css('background-color', color);
   $('#color_history_column').prepend(newLastColor.clone());
+
   if ($('.previous_color_bar').length > 16){
     $('.previous_color_bar').last().remove();
+  }
+  if ($('.previous_color_column').length >16){
     $('.previous_color_column').last().remove();
   }
 }
@@ -171,10 +174,20 @@ $(document).ready(function() {
 
     }
   });
-  $('.color_history').on('click', '.previous_color', function () {
+  $('#color_history_bar').on('click', '.previous_color', function () {
     var hex = rgb2hex($(this).css('background-color'));
-    changeBackgroundColor(hex);
+    var index = $('.previous_color_bar').index($(this));
     $(this).remove();
+    console.log(index);
+    $('.previous_color_column').eq(index).remove();
+    changeBackgroundColor(hex);
+  });
+  $('#color_history_column').on('click', '.previous_color', function () {
+    var hex = rgb2hex($(this).css('background-color'));
+    var index = $('.previous_color_column').index($(this));
+    $(this).remove();
+    $('.previous_color_bar').eq(index).remove();
+    changeBackgroundColor(hex);
   });
 
   $('#hex_input').keyup(function() {

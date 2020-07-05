@@ -117,7 +117,7 @@ button:active{
 .previous_color{
   height: 38px;
   width: 40px;
-  flex: 0 0 40px; /* can't grow, can shrink, start at 200px width */
+  flex: 0 0 40px;
   margin: 1px 2px;
   border: 1px solid black;
 }
