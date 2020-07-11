@@ -7,22 +7,23 @@ function changeBackgroundColor(color){
     var red = parseInt(color.substring(1, 3), 16);
     var green = parseInt(color.substring(3, 5), 16);
     var blue = parseInt(color.substring(5, 7), 16);
+    pushToHistory($('#background').css('background-color'));
     $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
     $("#current_color").css('background-color', color);
-    $('#current_color_name')[0].innerHTML = color;
-    $('.tint')[0].style.backgroundColor = color;
-    $('.shade')[0].style.backgroundColor = color;
-    $('.tint_name')[0].innerHTML = color;
-    $('.shade_name')[0].innerHTML = color;
+    $('#current_color_name').first().text(color);
+    $('.tint').first().css('background-color', color);
+    $('.shade').first().css('background-color', color);
+    $('.tint_name').first().text(color);
+    $('.shade_name').first().text(color);
     if (isLightColor(color)){
-      $('.tint_name')[0].style.color = ('#000');
-      $('.shade_name')[0].style.color = ('#000');
+      $('.tint_name').first().css('color',  '#000');
+      $('.shade_name').first().css('color',  '#000');
       $('.tone_name').css('color', '#000');
     }
     else {
-      $('.tint_name')[0].style.color = ('#fff');
-      $('.shade_name')[0].style.color = ('#fff');
+      $('.tint_name').first().css('color',  '#fff');
+      $('.shade_name').first().css('color',  '#fff');
       $('.tone_name').css('color', '#fff');
     }
     //Color the tints
@@ -30,22 +31,22 @@ function changeBackgroundColor(color){
       var tempRed = red + Math.round((255 - red)*1/1.2**($('.tint').length - i-1));
       var tempGreen = green + Math.round((255 - green)*1/1.2**($('.tint').length - i-1));
       var tempBlue = blue + Math.round((255 - blue)*1/1.2**($('.tint').length - i-1));
-      $('.tint')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
-      $('.tint_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
+      $('.tint').eq(i+1).css('background-color', 'rgb('+tempRed+','+tempGreen+','+tempBlue+')');
+      $('.tint_name').eq(i+1).text('#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue));
     }
     //Color the shades
     for (var i = 0; i < $('.shade').length-1; i++) {
       var tempRed = Math.round(red*1/1.1**(i+1));
       var tempGreen = Math.round(green*1/1.1**(i+1));
       var tempBlue =Math.round(blue*1/1.1**(i+1));
-      $('.shade')[i+1].style.backgroundColor = 'rgb('+tempRed+','+tempGreen+','+tempBlue+')';
-      $('.shade_name')[i+1].innerHTML = '#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue);
+      $('.shade').eq(i+1).css('background-color', 'rgb('+tempRed+','+tempGreen+','+tempBlue+')');
+      $('.shade_name').eq(i+1).text('#'+hex(tempRed)+hex(tempGreen)+hex(tempBlue));
     }
     //Color the tones
     for (var i = 0; i < $('.tone').length; i++) {
       var newColor = applySaturationToHexColor(color, (i/$('.tone').length)*100);
-      $('.tone')[i].style.backgroundColor = newColor;
-      $('.tone_name')[i].innerHTML = newColor;
+      $('.tone').eq(i).css('background-color', newColor);
+      $('.tone_name').eq(i).text(newColor);
     }
     $('.rgb_input').css('background-color', '#fff');
     $('#r_input').val(red);
@@ -54,6 +55,26 @@ function changeBackgroundColor(color){
   }
   else {
     $('#hex_input').css('background-color', '#ff6464');
+  }
+}
+
+function pushToHistory(color){
+  //Add to mobile page
+  var lastColor = $('.previous_color_bar').first();
+  var newLastColor = lastColor.clone();
+  newLastColor.css('background-color', color);
+  $('#history_icon').after(newLastColor);
+  //Add to desktop
+  lastColor = $('.previous_color_column').first();
+  newLastColor = lastColor.clone();
+  newLastColor.css('background-color', color);
+  $('#color_history_column').prepend(newLastColor.clone());
+
+  if ($('.previous_color_bar').length > 16){
+    $('.previous_color_bar').last().remove();
+  }
+  if ($('.previous_color_column').length >16){
+    $('.previous_color_column').last().remove();
   }
 }
 
@@ -136,10 +157,38 @@ function applySaturationToHexColor(hex, saturationPercent) {
   return newHex;
 }
 
+var showMobileViewHistory = false;
+
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
   $('.rgb_input').val(255);
   changeBackgroundColor('#ffffff');
+
+  $('#dropdown').on('click', function () {
+    showMobileViewHistory = !showMobileViewHistory;
+    if (showMobileViewHistory) {
+      $('#color_history_bar').css('display', 'flex');
+    }
+    else {
+      $('#color_history_bar').hide();
+
+    }
+  });
+  $('#color_history_bar').on('click', '.previous_color', function () {
+    var hex = rgb2hex($(this).css('background-color'));
+    var index = $('.previous_color_bar').index($(this));
+    $(this).remove();
+    console.log(index);
+    $('.previous_color_column').eq(index).remove();
+    changeBackgroundColor(hex);
+  });
+  $('#color_history_column').on('click', '.previous_color', function () {
+    var hex = rgb2hex($(this).css('background-color'));
+    var index = $('.previous_color_column').index($(this));
+    $(this).remove();
+    $('.previous_color_bar').eq(index).remove();
+    changeBackgroundColor(hex);
+  });
 
   $('#hex_input').keyup(function() {
     var color = $('#hex_input').val();

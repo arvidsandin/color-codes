@@ -27,3 +27,4 @@ Project Link: [https://github.com/arvidsandin/color-codes](https://github.com/ar
 ## Acknowledgements
 
 * Favicon made with [Favicon Generator](https://realfavicongenerator.net/)
+* Icons from [UXWing](https://uxwing.com/)
