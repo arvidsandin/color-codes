@@ -2,7 +2,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Color Codes](https://arvidsandin.github.io/color-codes/) is a website to search for and browse hex colors.
+[Color Codes](https://color-codes.imfast.io/) is a website to search for and browse hex colors.
 
 
 ### Built With
