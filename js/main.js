@@ -7,7 +7,7 @@ function changeBackgroundColor(color){
     var red = parseInt(color.substring(1, 3), 16);
     var green = parseInt(color.substring(3, 5), 16);
     var blue = parseInt(color.substring(5, 7), 16);
-    pushToHistory($('#background').css('background-color'));
+    pushToHistory(color);
     $('#hex_input').css('background-color', '#fff');
     $("#background").css('background-color', color);
     $("#current_color").css('background-color', color);
@@ -61,6 +61,10 @@ function changeBackgroundColor(color){
 function pushToHistory(color){
   //Add to mobile page
   var lastColor = $('.previous_color_bar').first();
+  console.log(rgb2hex(lastColor.css('background-color')));
+  if (rgb2hex(lastColor.css('background-color')) == color) {
+    return
+  }
   var newLastColor = lastColor.clone();
   newLastColor.css('background-color', color);
   $('#history_icon').after(newLastColor);
@@ -178,7 +182,6 @@ $(document).ready(function() {
     var hex = rgb2hex($(this).css('background-color'));
     var index = $('.previous_color_bar').index($(this));
     $(this).remove();
-    console.log(index);
     $('.previous_color_column').eq(index).remove();
     changeBackgroundColor(hex);
   });
