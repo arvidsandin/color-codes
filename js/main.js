@@ -61,7 +61,6 @@ function changeBackgroundColor(color){
 function pushToHistory(color){
   //Add to mobile page
   var lastColor = $('.previous_color_bar').first();
-  console.log(rgb2hex(lastColor.css('background-color')));
   if (rgb2hex(lastColor.css('background-color')) == color) {
     return
   }
