@@ -178,6 +178,10 @@ button:active{
   text-align: center;
   overflow: visible;
 }
+.random_color_color{
+  float: left;
+  margin: 0 0 0 0.25em;
+}
 #random_color{
   margin: auto;
 }
