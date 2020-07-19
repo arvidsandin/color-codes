@@ -79,6 +79,22 @@ function pushToHistory(color){
   if ($('.previous_color_column').length >16){
     $('.previous_color_column').last().remove();
   }
+  //Add to storage
+  if(localStorage.getItem("history")){
+    var history = JSON.parse(localStorage.getItem("history"));
+    var i = history.length;
+    if (i > 15) {
+      i = 15;
+    }
+    for (i; i > 0; i--) {
+      history[i] = history[i-1];
+    }
+    history[0] = color;
+    localStorage.setItem("history", JSON.stringify(history));
+  }
+  else{
+    localStorage.setItem("history", JSON.stringify([color]));
+  }
 }
 
 function isColor(strColor){
@@ -165,7 +181,17 @@ var showMobileViewHistory = false;
 $(document).ready(function() {
   $('#hex_input').val('#ffffff');
   $('.rgb_input').val(255);
-  changeBackgroundColor('#ffffff');
+  if(localStorage.getItem("history")){
+    var history = JSON.parse(localStorage.getItem("history"));
+    localStorage.removeItem('history');
+    for (i = history.length-1; i >= 0 ; i--) {
+      pushToHistory(history[i]);
+    }
+    changeBackgroundColor(history[0]);
+  }
+  else {
+    changeBackgroundColor('#ffffff');
+  }
 
   $('#dropdown').on('click', function () {
     showMobileViewHistory = !showMobileViewHistory;
