@@ -9,6 +9,12 @@ body{
 p{
   margin: 8px;
 }
+a{
+  color: #3366CC;
+}
+a:visited{
+  color: #3366CC;
+}
 h1{
   margin: 0;
   font-family: sans-serif;
@@ -231,7 +237,15 @@ button:active{
 .shade_name{
   color: #fff;
 }
-
+#bottom_row{
+  font-family: sans-serif;
+  padding: 1em;
+  margin: 0;
+  text-align: right;
+}
+#link_icon{
+  font-size: 0.8em;
+}
 @media only screen and (min-width: 650px) {
   #dropdown{
     display: none;
@@ -274,5 +288,10 @@ button:active{
   .tint, .shade, .tone{
     height: 100px;
     flex: 1 1 9.5%;
+  }
+  #bottom_row{
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 }
