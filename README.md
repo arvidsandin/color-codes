@@ -2,7 +2,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Color Codes](https://color-codes.imfast.io/) is a website to search for and browse hex colors.
+[Color Codes](https://color-codes.onrender.com) is a website to search for and browse hex colors.
 
 
 ### Built With
